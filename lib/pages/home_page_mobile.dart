@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tesmon_portfolio/widgets/buttons/buttons_main.dart';
 import 'package:tesmon_portfolio/widgets/circles.dart';
+/* import 'package:material_design_icons_flutter/material_design_icons_flutter.dart'; */
 
 class HomePageMobile extends StatefulWidget {
   const HomePageMobile({super.key});
@@ -20,12 +21,14 @@ class _HomePageMobileState extends State<HomePageMobile> {
     );
   }
 
-    _scrollToBottom() {
-    _scrollController.animateTo(
-      _scrollController.position.maxScrollExtent,
-      curve: Curves.easeOut,
-      duration: const Duration(milliseconds: 300),
-    );
+  void _scrollToBottom() {
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(
+        _scrollController.position.maxScrollExtent,
+        curve: Curves.ease,
+        duration: const Duration(milliseconds: 400),
+      );
+    }
   }
 
   @override
@@ -57,31 +60,69 @@ class _HomePageMobileState extends State<HomePageMobile> {
                           height: 1.0,
                         ),
                       ),
-                      const Text(
-                        'IM',
-                        textAlign: TextAlign.right,
-                        style: TextStyle(
-                          fontFamily: "Mono",
-                          fontWeight: FontWeight.w700,
-                          fontSize: 60.0,
-                          height: 1.0,
-                        ),
-                      ),
-                      ElevatedButton(
-                        onPressed: _scrollToBottom(),
-                        child: const Text('Go to Bottom'),
+                      Row(
+                        children: [
+                          const Text(
+                            'I',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontFamily: "Mono",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 60.0,
+                              height: 1.0,
+                            ),
+                          ),
+                          IconButton(
+                            icon: const Icon(Icons.arrow_downward_sharp),
+                            onPressed: _scrollToBottom,
+                            style: ButtonStyle(
+                              alignment: Alignment.topCenter,
+                              overlayColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.hovered)) {
+                                    return const Color.fromARGB(
+                                        0, 75, 198, 255);
+                                  }
+                                  return null;
+                                  // Use the component's default.
+                                },
+                              ),
+                              foregroundColor:
+                                  MaterialStateProperty.resolveWith<Color?>(
+                                (Set<MaterialState> states) {
+                                  if (states.contains(MaterialState.hovered)) {
+                                    return Colors
+                                        .blue; // Change the overlay color when hovered
+                                  }
+                                  return null; // Use the component's default.
+                                },
+                              ),
+                            ),
+                          ),
+                          const Text(
+                            'M',
+                            textAlign: TextAlign.right,
+                            style: TextStyle(
+                              fontFamily: "Mono",
+                              fontWeight: FontWeight.w700,
+                              fontSize: 60.0,
+                              height: 1.0,
+                            ),
+                          ),
+                        ],
                       ),
                     ],
                   ),
                   const CirclesWidget(),
                   const SizedBox(height: 40.0, width: 50.0),
-                  Center(
+                  const Center(
                     child: Padding(
-                      padding: const EdgeInsets.only(bottom: 12.0),
+                      padding: EdgeInsets.only(bottom: 12.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          const Text(
+                          Text(
                             'CLARA',
                             style: TextStyle(
                               fontFamily: "Mono",
@@ -90,7 +131,7 @@ class _HomePageMobileState extends State<HomePageMobile> {
                               height: 1.0,
                             ),
                           ),
-                          const Text(
+                          Text(
                             'TESMON',
                             textAlign: TextAlign.right,
                             style: TextStyle(
@@ -100,10 +141,6 @@ class _HomePageMobileState extends State<HomePageMobile> {
                               height: 1.0,
                             ),
                           ),
-                          ElevatedButton(
-                        onPressed: _scrollToTop,
-                        child: const Text('Go to Top'),
-                      ),
                         ],
                       ),
                     ),
@@ -122,15 +159,49 @@ class _HomePageMobileState extends State<HomePageMobile> {
             width: double.infinity,
             height: screenHeight,
             color: const Color.fromARGB(255, 255, 255, 255),
-            child: const Padding(
-              padding: EdgeInsets.all(15.0),
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  AboutButton(),
-                  ProjectsButton(),
-                  ContactButton(),
+                  IconButton(
+                    icon: const Icon(Icons.arrow_upward_sharp),
+                    onPressed: _scrollToTop,
+                    style: ButtonStyle(
+                      alignment: Alignment.topCenter,
+                      overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.pressed)) {
+                            return const Color.fromARGB(0, 75, 198, 255);
+                          }
+                          return null;
+                          // Use the component's default.
+                        },
+                      ),
+                      foregroundColor:
+                          MaterialStateProperty.resolveWith<Color?>(
+                        (Set<MaterialState> states) {
+                          if (states.contains(MaterialState.pressed)) {
+                            return Colors
+                                .blue; // Change the overlay color when hovered
+                          }
+                          return null; // Use the component's default.
+                        },
+                      ),
+                    ),
+                  ),
+                  const SizedBox(
+                    height: 600,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        AboutButton(),
+                        ProjectsButton(),
+                        ContactButton(),
+                      ],
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -139,9 +210,7 @@ class _HomePageMobileState extends State<HomePageMobile> {
       ),
     );
   }
-}
-        
-    
+}    
     /*     child: ListView(
         scrollDirection: Axis.vertical,
         children: [

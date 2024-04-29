@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tesmon_portfolio/pages/about_page.dart';
+import 'package:tesmon_portfolio/pages/contact_page.dart';
 import 'package:tesmon_portfolio/pages/projects_page.dart';
 
 class AboutButton extends StatefulWidget {
@@ -29,7 +30,7 @@ class _AboutButtonState extends State<AboutButton> {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        height: 30.0,
+        height: 40.0,
         decoration: _isHovering
             ? BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -104,8 +105,8 @@ class _AboutButtonState extends State<AboutButton> {
                 ),
                 Icon(
                   Icons.radio_button_unchecked,
-                            color: Colors.red,
-                  size: 12.0,
+                  color: Colors.red,
+                  size: 14.0,
                   // Choose the icon you want
                 )
               ],
@@ -144,7 +145,7 @@ class _ProjectsButtonState extends State<ProjectsButton> {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        height: 30.0,
+        height: 40.0,
         decoration: _isHovering
             ? BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -181,9 +182,8 @@ class _ProjectsButtonState extends State<ProjectsButton> {
                 },
               ),
             ),
-          
-          onPressed: () {
-            Navigator.push(
+            onPressed: () {
+              Navigator.push(
                 context,
                 PageRouteBuilder(
                   pageBuilder: (context, animation, secondaryAnimation) =>
@@ -207,26 +207,26 @@ class _ProjectsButtonState extends State<ProjectsButton> {
                   },
                 ),
               );
-          },
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "PROJECTS",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 1, 1, 1),
-                    fontFamily: "Mono",
-                    fontWeight: FontWeight.w100),
-              ),
-              Icon(
-                Icons.arrow_back_ios_sharp,
-                color: Colors.black,
-                size: 10.0,
-              ), // Choose the icon you want
-            ],
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "PROJECTS",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 1, 1, 1),
+                      fontFamily: "Mono",
+                      fontWeight: FontWeight.w100),
+                ),
+                Icon(
+                  Icons.radio_button_unchecked,
+                  color: Colors.blue,
+                  size: 14.0,
+                ),
+              ],
+            ),
           ),
         ),
-      ),
       ),
     );
   }
@@ -259,7 +259,7 @@ class _ContactButtonState extends State<ContactButton> {
       },
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
-        height: 30.0,
+        height: 40.0,
         decoration: _isHovering
             ? BoxDecoration(
                 color: const Color.fromARGB(255, 255, 255, 255),
@@ -281,39 +281,63 @@ class _ContactButtonState extends State<ContactButton> {
                 color: const Color.fromARGB(255, 255, 255, 255),
                 borderRadius: BorderRadius.circular(10),
               ),
-        child: TextButton(
-          style: ButtonStyle(
-            overlayColor: MaterialStateProperty.resolveWith<Color>(
-              (Set<MaterialState> states) {
-                if (states.contains(MaterialState.hovered)) {
-                  return Colors
-                      .transparent; // Use transparent color when button is hovered over
-                }
-                return const Color.fromARGB(
-                    0, 131, 92, 92); // Defer to the widget's default.
-              },
-            ),
-            // Other styles...
-          ),
-          onPressed: () {
-            // Handle button press
-          },
-          child: const Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: <Widget>[
-              Text(
-                "CONTACT",
-                style: TextStyle(
-                    color: Color.fromARGB(255, 1, 1, 1),
-                    fontFamily: "Mono",
-                    fontWeight: FontWeight.w100),
+        child: Hero(
+          tag: "ContactPage",
+          child: TextButton(
+            style: ButtonStyle(
+              overlayColor: MaterialStateProperty.resolveWith<Color>(
+                (Set<MaterialState> states) {
+                  if (states.contains(MaterialState.hovered)) {
+                    return Colors.transparent;
+                  }
+                  return const Color.fromARGB(
+                      0, 131, 92, 92); // Defer to the widget's default.
+                },
               ),
-              Icon(
-                Icons.arrow_back_ios_sharp,
-                color: Colors.black,
-                size: 10.0,
-              ), // Choose the icon you want
-            ],
+            ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                PageRouteBuilder(
+                  pageBuilder: (context, animation, secondaryAnimation) =>
+                      const ContactPage(),
+                  transitionsBuilder:
+                      (context, animation, secondaryAnimation, child) {
+                    const begin = Offset(0.0, -1.0);
+                    const end = Offset.zero;
+                    const curve = Curves.ease;
+                    final tween = Tween(begin: begin, end: end)
+                        .chain(CurveTween(curve: curve));
+                    final offsetAnimation = animation.drive(tween);
+
+                    return SlideTransition(
+                      position: offsetAnimation,
+                      child: FadeTransition(
+                        opacity: animation,
+                        child: child,
+                      ),
+                    );
+                  },
+                ),
+              );
+            },
+            child: const Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                Text(
+                  "CONTACT",
+                  style: TextStyle(
+                      color: Color.fromARGB(255, 1, 1, 1),
+                      fontFamily: "Mono",
+                      fontWeight: FontWeight.w100),
+                ),
+                Icon(
+                  Icons.radio_button_unchecked,
+                  color: Colors.yellow,
+                  size: 14.0,
+                ), 
+              ],
+            ),
           ),
         ),
       ),

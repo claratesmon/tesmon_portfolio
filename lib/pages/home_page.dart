@@ -63,18 +63,18 @@ class _HomePageState extends State<HomePage> {
                               Text(
                                 'CLARA',
                                 textAlign: TextAlign.left,
-                                style: GoogleFonts.hammersmithOne(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                                style: GoogleFonts.robotoMono(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w700,
                                   color: Colors.black,
                                 ),
                               ),
                               Text(
                                 'TESMON',
                                 textAlign: TextAlign.right,
-                                style: GoogleFonts.hammersmithOne(
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                                style: GoogleFonts.robotoMono(
+                                  fontSize: 40,
+                                  fontWeight: FontWeight.w700,
                                   color: Colors.black,
                                 ),
                               ),

@@ -38,6 +38,14 @@ dependencies:
   responsive_builder: ^0.7.0
   google_fonts: ^6.2.1
   material_design_icons_flutter: ^7.0.7296
+  flutter_animate: ^4.5.0
+  animate_gradient: ^0.0.2+1
+  mesh_gradient: ^1.3.2
+  flutter_shaders: ^0.1.2
+  infinite_carousel: ^1.1.1
+  vertical_card_pager: ^1.6.2
+  url_launcher: ^6.2.6
+  mailto: ^2.0.0
 
 dev_dependencies:
   flutter_test:
@@ -65,8 +73,11 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets/images/simira_card_t.png
+    - assets/images/4_hands_card_t.png
+    - assets/images/tuppers_card_t.png
+    - assets/images/typedance_card_t.png
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

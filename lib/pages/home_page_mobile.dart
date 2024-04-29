@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:tesmon_portfolio/widgets/buttons/buttons_main.dart';
 import 'package:tesmon_portfolio/widgets/circles.dart';
+import 'package:google_fonts/google_fonts.dart';
+
 /* import 'package:material_design_icons_flutter/material_design_icons_flutter.dart'; */
 
 class HomePageMobile extends StatefulWidget {
@@ -62,11 +64,10 @@ class _HomePageMobileState extends State<HomePageMobile> {
                       ),
                       Row(
                         children: [
-                          const Text(
+                           Text(
                             'I',
                             textAlign: TextAlign.right,
-                            style: TextStyle(
-                              fontFamily: "Mono",
+                            style: GoogleFonts.robotoMono(
                               fontWeight: FontWeight.w700,
                               fontSize: 60.0,
                               height: 1.0,
@@ -100,11 +101,10 @@ class _HomePageMobileState extends State<HomePageMobile> {
                               ),
                             ),
                           ),
-                          const Text(
+                           Text(
                             'M',
                             textAlign: TextAlign.right,
-                            style: TextStyle(
-                              fontFamily: "Mono",
+                            style: GoogleFonts.robotoMono(
                               fontWeight: FontWeight.w700,
                               fontSize: 60.0,
                               height: 1.0,
@@ -116,16 +116,16 @@ class _HomePageMobileState extends State<HomePageMobile> {
                   ),
                   const CirclesWidget(),
                   const SizedBox(height: 40.0, width: 50.0),
-                  const Center(
+                   Center(
                     child: Padding(
-                      padding: EdgeInsets.only(bottom: 12.0),
+                      padding: const EdgeInsets.only(bottom: 12.0),
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Text(
                             'CLARA',
-                            style: TextStyle(
-                              fontFamily: "Mono",
+                            style: GoogleFonts.robotoMono(
+                              
                               fontWeight: FontWeight.w600,
                               fontSize: 60.0,
                               height: 1.0,
@@ -134,8 +134,8 @@ class _HomePageMobileState extends State<HomePageMobile> {
                           Text(
                             'TESMON',
                             textAlign: TextAlign.right,
-                            style: TextStyle(
-                              fontFamily: "Mono",
+                            style: GoogleFonts.robotoMono(
+                              
                               fontWeight: FontWeight.w600,
                               fontSize: 60.0,
                               height: 1.0,

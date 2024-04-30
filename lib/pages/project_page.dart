@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:tesmon_portfolio/widgets/shapes.dart'; */
 import 'package:tesmon_portfolio/model/projects_data.dart';
+import 'package:tesmon_portfolio/widgets/buttons/buttons_main.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class ProjectDetailsPage extends StatefulWidget {
@@ -15,8 +16,6 @@ class ProjectDetailsPage extends StatefulWidget {
 }
 
 class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
-
-
   bool _isHovering1 = false;
 
   late Uri url;
@@ -28,19 +27,39 @@ class _ProjectDetailsPageState extends State<ProjectDetailsPage> {
       url = Uri.parse(widget.project.siteUrl);
     }
   }
+
   @override
-void initState() {
-  super.initState();
-  url = Uri.parse(widget.project.siteUrl);
-}
+  void initState() {
+    super.initState();
+    url = Uri.parse(widget.project.siteUrl);
+  }
+
   @override
   Widget build(BuildContext context) {
-  
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-        title: const Text(""),
+        automaticallyImplyLeading: false,
+        title: Builder(
+            builder: (context) => ElevatedButton(
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  child: Image.asset("images/4_hands_card_t.png", height: 30),
+                )),
       ),
+      drawer: const Drawer(
+          child: Padding(
+            padding: EdgeInsets.all(8.0),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+              
+                    AboutButton(),
+                    ProjectsButton(),
+                    ContactButton(),
+                  ]),
+          )),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Hero(
@@ -162,7 +181,6 @@ void initState() {
                     }
                   },
                   child: AnimatedContainer(
-                  
                     duration: const Duration(milliseconds: 200),
                     height: 50.0,
                     decoration: _isHovering1

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tesmon_portfolio/model/projects_data.dart';
+import 'package:tesmon_portfolio/pages/about_page.dart';
 import 'package:tesmon_portfolio/pages/home_page.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:tesmon_portfolio/pages/project_page.dart';
@@ -18,9 +19,30 @@ class _ProjectsPageState extends State<ProjectsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Column(
+      appBar: AppBar(
+        automaticallyImplyLeading: false,
+        backgroundColor: Colors.white,
+        title: Builder(
+            builder: (context) => ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.white,
+                      surfaceTintColor: Colors.white,
+                      shadowColor: const Color.fromARGB(119, 0, 0, 0),
+                      elevation:
+                          MediaQuery.of(context).size.width < 600 ? 1.8 : 1,
+                      visualDensity: VisualDensity.standard),
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                  child: Image.asset("images/4_hands_card_t.png", height: 30),
+                )),
+      ),
+      drawer: const DrawerMenu(),
+      body:  Column(
+        mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          const SizedBox(height: 50),
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: MouseRegion(
@@ -35,108 +57,35 @@ class _ProjectsPageState extends State<ProjectsPage> {
                   _isHovering = false;
                 });
               },
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 200),
-                height: 30.0,
-                decoration: _isHovering
-                    ? BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: const [
-                          BoxShadow(
-                              color: Color.fromARGB(158, 189, 189, 189),
-                              offset: Offset(4, 4),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0),
-                          BoxShadow(
-                              color: Color.fromARGB(255, 247, 247, 247),
-                              offset: Offset(-3, -3),
-                              blurRadius: 10.0,
-                              spreadRadius: 2.0),
-                        ],
-                      )
-                    : BoxDecoration(
-                        color: const Color.fromARGB(255, 255, 255, 255),
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                child: Hero(
-                  tag: "ProjectsPage",
-                  child: TextButton(
-                    style: ButtonStyle(
-                      overlayColor: MaterialStateProperty.resolveWith<Color>(
-                        (Set<MaterialState> states) {
-                          if (states.contains(MaterialState.hovered)) {
-                            return Colors.transparent;
-                          }
-                          return const Color.fromARGB(0, 131, 92, 92);
-                        },
-                      ),
+              child: Hero(
+                tag: "ProjectsPage",
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const SizedBox(height: 10),
+                    const Icon(
+                      Icons.radio_button_unchecked,
+                      color: Colors.blue,
+                      size: 12.0,
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                        context,
-                        PageRouteBuilder(
-                          pageBuilder:
-                              (context, animation, secondaryAnimation) =>
-                                  const HomePage(),
-                          transitionsBuilder:
-                              (context, animation, secondaryAnimation, child) {
-                            const begin = Offset(0.0, 1.0);
-                            const end = Offset.zero;
-                            const curve = Curves.ease;
-                            final tween = Tween(begin: begin, end: end)
-                                .chain(CurveTween(curve: curve));
-                            final offsetAnimation = animation.drive(tween);
-
-                            return SlideTransition(
-                              position: offsetAnimation,
-                              child: FadeTransition(
-                                opacity: animation,
-                                child: child,
-                              ),
-                            );
-                          },
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        "PROJECTS",
+                        style: GoogleFonts.robotoMono(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w300,
+                          color: const Color.fromARGB(242, 0, 0, 0),
                         ),
-                      );
-                    },
-                    child: MouseRegion(
-                      onEnter: (event) {
-                        setState(() {
-                          _isHovering = true;
-                        });
-                      },
-                      onHover: (event) {
-                        setState(() {
-                          _isHovering = true;
-                        });
-                      },
-                      onExit: (event) {
-                        setState(() {
-                          _isHovering = false;
-                        });
-                      },
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: <Widget>[
-                          const Icon(Icons.radio_button_unchecked,
-                              color: Colors.blue, size: 14.0),
-                          Text(
-                            "HOME",
-                            style: GoogleFonts.robotoMono(
-                              fontSize: 12,
-                              fontWeight: FontWeight.w300,
-                              color: const Color.fromARGB(242, 0, 0, 0),
-                            ),
-                          ),
-                        ],
                       ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             ),
           ),
-          const Projects(),
+
+          const Projects(), // This is where we add the AboutInfo widget
         ],
       ),
     );
@@ -157,7 +106,6 @@ class _ProjectsState extends State<Projects> {
       "",
       "",
       "",
-      
     ];
 
     final projects = project.values.toList();
@@ -174,50 +122,17 @@ class _ProjectsState extends State<Projects> {
             padding: const EdgeInsets.symmetric(horizontal: 20.0),
             child: Stack(
               children: <Widget>[
+                
                 Positioned(
                   left: 0,
-                  right:0,
-                  top: 0,
-                  bottom:0,
-                  child: SizedBox(
-                    height: 400,
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 8.0),
-                      child: Text(
-                        "PROJECTS",
-                        style: GoogleFonts.dmSans(
-                          color: Colors.white,
-                          fontSize: 160,
-                          fontWeight: FontWeight.w500,
-                          letterSpacing: 25.0,
-                          shadows: <Shadow>[
-                            const BoxShadow(
-                              color: Color.fromARGB(255, 198, 198, 198),
-                              offset: Offset(1.0, 1.0),
-                              blurRadius: 1.0,
-                            ),
-                            const BoxShadow(
-                              color: Color.fromARGB(255, 215, 215, 215),
-                              offset: Offset(-1.0, -1.0),
-                              blurRadius: 1.0,
-                            ),
-                          ],
-                        ),
-                        textAlign: TextAlign.left,
-                      ),
-                    ),
-                  ),
-                ),
-                Positioned(
-                  left: 0,
-                  right:0,
-                  top: 0,
-                  bottom:0,
+                  right: 0,
+                  bottom: 150,
+                  
                   child: Container(
-                    constraints: const BoxConstraints(maxHeight: 700),
+                    constraints: const BoxConstraints(maxHeight: 800),
                     color: Colors.transparent,
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.symmetric(horizontal: 20.0),
                       child: VerticalCardPager(
                           titles: titles,
                           images: projects
@@ -225,7 +140,6 @@ class _ProjectsState extends State<Projects> {
                                     tag: e.name.toUpperCase(),
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(20.0),
-                                      
                                       child: Image.asset(
                                         e.imageUrl,
                                         fit: BoxFit.scaleDown,
@@ -254,10 +168,29 @@ class _ProjectsState extends State<Projects> {
                           onSelectedItem: (index) {
                             Navigator.push(
                               context,
-                              MaterialPageRoute(
-                                builder: (context) => ProjectDetailsPage(
+                              PageRouteBuilder(
+                                pageBuilder:
+                                    (context, animation, secondaryAnimation) =>
+                                        ProjectDetailsPage(
                                   project: projects[index],
                                 ),
+                                transitionsBuilder: (context, animation,
+                                    secondaryAnimation, child) {
+                                   const begin = Offset(0.0, 1.0);
+                                  const end = Offset.zero;
+                                  const curve = Curves.ease;
+
+                                  final tween = Tween(begin: begin, end: end)
+                                      .chain(CurveTween(curve: curve));
+
+                                  return SlideTransition(
+                                    position: animation.drive(tween),
+                                    child: child,
+                                  );
+                                },
+                                transitionDuration: const Duration(
+                                    seconds:
+                                        1), // Adjust this value to slow down or speed up the animation
                               ),
                             );
                           },

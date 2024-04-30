@@ -46,6 +46,7 @@ dependencies:
   vertical_card_pager: ^1.6.2
   url_launcher: ^6.2.6
   mailto: ^2.0.0
+  pointer_interceptor: ^0.10.1
 
 dev_dependencies:
   flutter_test:

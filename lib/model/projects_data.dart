@@ -22,8 +22,8 @@ class Project {
   "SIMIRA": Project(
       name: 'SIMIRA',
       title: 'Prototype portfolio showcasing an abstract art collection.',
-      description: 'Created the first prototype to digitally display an abstract collection and make it available for in-person purchase. Goal was to provide visibility and accessibility with a minimal yet an appealing design.',
-      role: 'Frontend Developer, UXUI design',
+      description: 'Created a digital gallery to display an abstract collection and make it available for in-person purchase.\nGoal was to provide visibility and accessibility with an appealing, minimal design.\nPrototype version 1.0',
+      role: 'Frontend Development\nUXUI Design',
       tools: 'Flutter\nFigma',
       imageUrl: 'images/simira_card_t.png',
       siteUrl: 'https://simira-cm.netlify.app/',
@@ -33,18 +33,18 @@ class Project {
       name: '4HANDS',
       title: 'Version 2.0 of first MVP web APP.',
       description: 'Co-created mobile-first platform prototype with token-based economy for people to find any kind of help in their area.\nVersion 2.0 of first MVP web APP.',
-      role: 'Fullstack Developer, UXUI Designer',
-      tools: 'React\nNodeJS\nMongoDB\nFigma',
+      role: 'Fullstack Developer\nUXUI Design',
+      tools: 'React\nNodeJS\nExpress\nVite\nMongoDB\nFigma',
       imageUrl: 'images/4_hands_card_t.png',
       siteUrl: 'https://4-hands.netlify.app/',
       project: 2
   ),
   "ALL YOU CAN TUPPER": Project(
       name: 'ALL YOU CAN TUPPER',
-      title: 'Collaborative Fullstack project.\nWeb App that allows users to share their leftover food, as well request other\'s in an accessible way.',
+      title: 'Collaborative Fullstack project \nVersion 1.0. Web App that allows users to share their leftover food, as well request other\'s in an accessible way.',
       description: 'Collaborative Fullstack project.\nWeb App that allows users to share their leftover food, as well request other\'s in an accessible way.',
       role: 'Fullstack Developer',
-      tools: 'JavaScript\nNodeJS\nMongoDB\nFigma',
+      tools: 'JavaScript\nNodeJS\nExpress\nMongoDB\nFigma',
       imageUrl: 'images/tuppers_card_t.png',
       siteUrl: 'https://app-project.adaptable.app/',
       project: 3

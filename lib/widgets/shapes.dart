@@ -23,25 +23,31 @@ class BackgroundPainter extends CustomPainter {
       30,
     );
     final circle1Offset = Offset(
-    200/ 2 * (1 + sin(2 * pi * _animation.value / 2 + pi / 2 )), 
-    200 / 5 * (1 + sin(2 * pi * _animation.value / 2 + pi / 2))
-  );
-  final circle2Offset = Offset(
-    300 / 3 * (1 + sin(2 * pi * _animation.value / 2 + pi / 3)), 
-    300 / 4 * (1 + sin(2 * pi * _animation.value / 2 + pi / 3))
-  );
-  final circle3Offset = Offset(
-    200 / 2 * (1 + sin(2 * pi * _animation.value / 2 + pi / 2)), 
-    200 / 6 * (1 + sin(2 * pi * _animation.value / 2 ))
-  );
+        size.width -
+            (200 / 2 * (1 + sin(2 * pi * _animation.value / 2 + pi / 2))),
+        size.height -
+            (200 / 5 * (1 + sin(2 * pi * _animation.value / 2 + pi / 2))));
+    final circle2Offset = Offset(
+        size.width -
+            (300 / 3 * (1 + sin(2 * pi * _animation.value / 2 + pi / 3))),
+        size.height -
+            (300 / 4 * (1 + sin(2 * pi * _animation.value / 2 + pi / 3))));
+    final circle3Offset = Offset(
+        size.width -
+            (200 / 2 * (1 + sin(2 * pi * _animation.value / 2 + pi / 2))),
+        size.height - (200 / 6 * (1 + sin(2 * pi * _animation.value / 2))));
 
-    final opacity = _animation.value ;
+    final opacity = _animation.value;
 
-
-  canvas.drawCircle(circle1Offset, 120.0, paint..color = const Color.fromRGBO(33, 150, 243, 1).withOpacity(opacity));
-  canvas.drawCircle(circle2Offset, 80.0, paint..color = Colors.red.withOpacity(opacity));
-  canvas.drawCircle(circle3Offset, 50.0, paint..color = Colors.yellow.withOpacity(opacity));
-    
+    canvas.drawCircle(
+        circle1Offset,
+        120.0,
+        paint
+          ..color = const Color.fromRGBO(33, 150, 243, 1).withOpacity(opacity));
+    canvas.drawCircle(
+        circle2Offset, 80.0, paint..color = Colors.red.withOpacity(opacity));
+    canvas.drawCircle(
+        circle3Offset, 50.0, paint..color = Colors.yellow.withOpacity(opacity));
   }
 
   @override
@@ -75,7 +81,6 @@ class BackgroundShapesState extends State<BackgroundShapes>
     super.dispose();
   }
 
-  
   @override
   Widget build(BuildContext context) {
     return AnimatedBuilder(
@@ -94,7 +99,5 @@ class BackgroundShapesState extends State<BackgroundShapes>
         );
       },
     );
-
-
   }
 }

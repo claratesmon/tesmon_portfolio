@@ -2,11 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'dart:async';
 import 'package:flutter_animate/flutter_animate.dart';
-import 'package:tesmon_portfolio/widgets/buttons/buttons_main.dart';
+
+import 'package:tesmon_portfolio/widgets/drawer_menu.dart';
 import 'package:tesmon_portfolio/widgets/shapes.dart';
 
 class AboutPage extends StatefulWidget {
-  const AboutPage({super.key});
+  const AboutPage({Key? key}) : super(key: key);
 
   @override
   State<AboutPage> createState() => _AboutPageState();
@@ -14,33 +15,67 @@ class AboutPage extends StatefulWidget {
 
 class _AboutPageState extends State<AboutPage> {
   bool _isHovering = false;
+  
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: Colors.transparent,
+        elevation: 0,
+        shadowColor: Colors.transparent,
+        backgroundColor: Colors.grey[300],
+        foregroundColor: Colors.grey[300],
+        surfaceTintColor: Colors.grey[300],
+
         title: Builder(
-            builder: (context) => ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.white,
-                      foregroundColor: Colors.white,
-                      surfaceTintColor: Colors.white,
-                      shadowColor: const Color.fromARGB(119, 0, 0, 0),
-                      elevation:
-                          MediaQuery.of(context).size.width < 600 ? 1.8 : 1,
-                      visualDensity: VisualDensity.standard),
-                  onPressed: () {
-                    Scaffold.of(context).openDrawer();
-                  },
-                  child: Image.asset("images/4_hands_card_t.png", height: 30),
+            builder: (context) => Center(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(vertical: 35),
+                    decoration: BoxDecoration(
+                      color: Colors.grey[300],
+                      borderRadius: BorderRadius.circular(10),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.shade400,
+                            offset: const Offset(3, 3),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                        const BoxShadow(
+                            color: Color.fromARGB(255, 255, 255, 255),
+                            offset: Offset(-2, -2),
+                            blurRadius: 15.0,
+                            spreadRadius: 1.0),
+                      ],
+                    ),
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.grey[300],
+                          foregroundColor: Colors.grey[300],
+                          surfaceTintColor: Colors.grey[300],
+                          shadowColor: const Color.fromARGB(0, 44, 44, 44),
+                          elevation:
+                              0 /* MediaQuery.of(context).size.width < 600 ? 1.8 : 1 */,
+                          ),
+                      onPressed: () {
+                        Scaffold.of(context).openDrawer();
+                      },
+                      child: const Icon(
+                        Icons.menu_sharp,
+                        color: Colors.white,
+                        size: 16.0,
+                      ),
+                    ),
+                  ),
                 )),
       ),
       drawer: const DrawerMenu(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
+          
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: MouseRegion(
@@ -55,25 +90,27 @@ class _AboutPageState extends State<AboutPage> {
                   _isHovering = false;
                 });
               },
-              child: Hero(
+              child:  const Hero(
                 tag: "AboutPage",
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    const SizedBox(height: 10),
-                    const Icon(
+                    SizedBox(height: 30),
+                   Icon(
                       Icons.radio_button_unchecked,
                       color: Colors.red,
                       size: 12.0,
                     ),
                     Padding(
-                      padding: const EdgeInsets.all(8.0),
+                      padding: EdgeInsets.all(8.0),
                       child: Text(
                         "ABOUT",
-                        style: GoogleFonts.robotoMono(
+                        style: TextStyle(
+                        fontFamily: 'Mono',
+                        letterSpacing: 2,
                           fontSize: 18,
                           fontWeight: FontWeight.w300,
-                          color: const Color.fromARGB(242, 0, 0, 0),
+                          color: Color.fromARGB(242, 0, 0, 0),
                         ),
                       ),
                     ),
@@ -87,27 +124,6 @@ class _AboutPageState extends State<AboutPage> {
         ],
       ),
     );
-  }
-}
-
-class DrawerMenu extends StatelessWidget {
-  const DrawerMenu({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return const Drawer(
-        child: Padding(
-      padding: EdgeInsets.all(8.0),
-      child:
-          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-        HomeButton(),
-        AboutButton(),
-        ProjectsButton(),
-        ContactButton(),
-      ]),
-    ));
   }
 }
 
@@ -128,89 +144,97 @@ class _AboutInfoState extends State<AboutInfo> with TickerProviderStateMixin {
                 gradient: RadialGradient(
                 ),
               ), */
-        body: Center(
-          child: Padding(
-            padding: const EdgeInsets.all(20.0),
-            child: Column(
-              children: <Widget>[
-                const SizedBox(height: 30.0),
-                Text.rich(
-                  TextSpan(
-                    text: 'Where ',
-                    style: GoogleFonts.robotoMono(
-                      fontSize: 26,
-                      fontWeight: FontWeight.w300,
+        body: Expanded(
+          child: Center(
+            child: Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: <Widget>[
+                  const SizedBox(height: 30.0),
+                  const Text.rich(
+                    TextSpan(
+                      text: 'Where ',
+                      style: TextStyle(
+                        fontFamily: 'RobotoMono',
+                        fontSize: 26,
+                        fontWeight: FontWeight.w300,
+                        color: Colors.black,
+                       
+                      ),
+                      children: <TextSpan>[
+                        TextSpan(
+                          text: 'functionality ',
+                          style: TextStyle(
+                            fontFamily: 'RobotoMono',
+                            fontSize: 26,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black,
+                        backgroundColor: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                          text: 'meets',
+                          style: TextStyle(
+                            fontFamily: 'RobotoMono',
+                            fontSize: 26,
+                            fontWeight: FontWeight.w300,
+                            color: Colors.black,
+                        backgroundColor: Colors.white,
+                          ),
+                        ),
+                        TextSpan(
+                            text: ' smooth ',
+                            style: TextStyle(
+                                fontFamily: 'RobotoMono',
+                                color: Colors.black,
+                                fontSize: 28,
+                                fontWeight: FontWeight.w500,
+                                fontStyle: FontStyle.italic)),
+                        TextSpan(
+                          text: 'visuals',
+                          style: TextStyle(
+                            fontFamily: 'RobotoMono',
+                            fontSize: 26,
+                            fontWeight: FontWeight.w300,
+                          ),
+                        ),
+                      ],
                     ),
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: 'functionality ',
-                        style: GoogleFonts.robotoMono(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      TextSpan(
-                        text: 'meets',
-                        style: GoogleFonts.robotoMono(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                      TextSpan(
-                          text: ' smooth ',
-                          style: GoogleFonts.outfit(
-                              fontSize: 28,
-                              fontWeight: FontWeight.w500,
-                              fontStyle: FontStyle.italic)),
-                      TextSpan(
-                        text: 'visuals',
-                        style: GoogleFonts.robotoMono(
-                          fontSize: 26,
-                          fontWeight: FontWeight.w300,
-                        ),
-                      ),
-                    ],
-                  ),
-                  textAlign: TextAlign.center,
-                )
-                    .animate()
-                    .fadeIn(delay: 300.ms, duration: 500.ms)
-                    .then()
-                    .shimmer(
-                        delay: 400.ms,
-                        duration: 800.ms,
-                        curve: Curves.easeInCubic),
-                const SizedBox(height: 40.0),
-                const ChangingText()
-                    .animate()
-                    .fadeIn(delay: 2000.ms, duration: 500.ms),
-                const SizedBox(height: 60.0),
-                Transform.translate(
-                  offset: const Offset(-1, -1),
-                  child: Text(
+                    textAlign: TextAlign.center,
+                  )
+                      .animate()
+                      .fadeIn(delay: 300.ms, duration: 500.ms)
+                      .then()
+                      .shimmer(
+                          delay: 400.ms, duration: 800.ms, curve: Curves.ease),
+                  const SizedBox(height: 40.0),
+                  const ChangingText()
+                      .animate()
+                      .fadeIn(delay: 2000.ms, duration: 500.ms),
+                  const SizedBox(height: 60.0),
+                  Text(
                     'I am Frontend Developer, drawn to visuals and impactful designs as a result of clean, scalable code.',
                     style: GoogleFonts.robotoMono(
-                      fontSize: 12,
+                      fontSize:
+                          MediaQuery.of(context).size.width > 700 ? 14 : 10,
                       fontWeight: FontWeight.w300,
-                      color: const Color.fromARGB(255, 0, 0, 0),
+                      color:Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ).animate().fadeIn(delay: 5000.ms, duration: 500.ms),
-                ),
-                const SizedBox(height: 35.0),
-                Transform.translate(
-                  offset: const Offset(-1, -1),
-                  child: Text(
+                  const SizedBox(height: 35.0),
+                  Text(
                     'Two sources of creation, that now form a synergy from where I can sculpt interfaces, ensuring a seamless union between form and function.',
                     style: GoogleFonts.robotoMono(
-                      fontSize: 12,
+                      fontSize:
+                          MediaQuery.of(context).size.width > 700 ? 14 : 10,
                       fontWeight: FontWeight.w300,
-                      color: const Color.fromARGB(255, 0, 0, 0),
+                       color:Colors.black,
                     ),
                     textAlign: TextAlign.center,
                   ).animate().fadeIn(delay: 8000.ms, duration: 500.ms),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ),
@@ -236,7 +260,7 @@ class ChangingTextState extends State<ChangingText> {
   @override
   void initState() {
     super.initState();
-    Timer.periodic(Duration(seconds: 10), (Timer t) {
+    Timer.periodic(const Duration(seconds: 10), (Timer t) {
       setState(() {
         index = (index + 1) % texts.length;
       });
@@ -253,7 +277,7 @@ class ChangingTextState extends State<ChangingText> {
       child: Text(texts[index],
           key: ValueKey<String>(texts[index]),
           style: GoogleFonts.robotoMono(
-            fontSize: 20,
+            fontSize: MediaQuery.of(context).size.width > 700 ? 20 : 16,
             fontWeight: FontWeight.w300,
             color: const Color.fromARGB(255, 0, 0, 0),
           ),

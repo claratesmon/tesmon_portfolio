@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import 'package:tesmon_portfolio/widgets/buttons/buttons_main.dart';
 import 'package:tesmon_portfolio/widgets/circles.dart';
@@ -68,11 +69,8 @@ class _HomePageState extends State<HomePage> {
   double layerSpeed6 = 0.27;
 
   double sigmoid(double x) {
-  return 1 / (1 + exp(x/1000));
-}
-double slowDecrease(double x) {
-  return 1 - sigmoid(x / 1000); // Adjust the denominator to control the rate of decrease
-}
+    return 1 / (1 + exp(x / 1000));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,12 +79,35 @@ double slowDecrease(double x) {
     double layoutHeight = screenHeight * 3.5;
 
     return Scaffold(
+      backgroundColor: Colors.grey[300],
       body: Container(
         width: MediaQuery.of(context).size.width,
         padding: const EdgeInsets.all(15.0),
         /* decoration: BoxDecoration(), */
         child: Stack(
           children: [
+            /* Positioned(
+              top: 0,
+              right: screenWidth / 2 - 59,
+              child: Text("S C R O L L",
+              textAlign: TextAlign.center,
+                  style: GoogleFonts.robotoMono(
+                    fontSize: 12,
+                    color: Color.fromARGB(255, 218, 218, 218),
+                     shadows: <Shadow>[
+                            const BoxShadow(
+                              color: Color.fromARGB(255, 198, 198, 198),
+                              offset: Offset(1.0, 1.0),
+                              blurRadius: 1.0,
+                            ),
+                            const BoxShadow(
+                              color: Color.fromARGB(255, 215, 215, 215),
+                              offset: Offset(-1.0, -1.0),
+                              blurRadius: 1.0,
+                            ),
+                          ],
+                  )),
+            ), */
             Positioned(
               top: 200 + (speedGreet * _scrollOffset),
               right: 0,
@@ -94,12 +115,12 @@ double slowDecrease(double x) {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  const Text(
+                  Text(
                     'HI',
                     style: TextStyle(
                       fontFamily: "Mono",
                       fontWeight: FontWeight.w700,
-                      fontSize: 60.0,
+                      fontSize: screenWidth < 550 ? 45.0 : 65.0,
                       height: 1.0,
                     ),
                   ),
@@ -110,7 +131,7 @@ double slowDecrease(double x) {
                         textAlign: TextAlign.right,
                         style: GoogleFonts.robotoMono(
                           fontWeight: FontWeight.w700,
-                          fontSize: 60.0,
+                          fontSize: screenWidth < 550 ? 45.0 : 65.0,
                           height: 1.0,
                         ),
                       ),
@@ -119,7 +140,7 @@ double slowDecrease(double x) {
                         textAlign: TextAlign.right,
                         style: GoogleFonts.robotoMono(
                           fontWeight: FontWeight.w700,
-                          fontSize: 60.0,
+                          fontSize: screenWidth < 550 ? 45.0 : 65.0,
                           height: 1.0,
                         ),
                       ),
@@ -131,7 +152,7 @@ double slowDecrease(double x) {
             Positioned(
               left: 0,
               right: 0,
-              bottom: 200 +( speedName * _scrollOffset),
+              bottom: 150 + (speedName * _scrollOffset),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -139,7 +160,7 @@ double slowDecrease(double x) {
                     'CLARA',
                     style: GoogleFonts.robotoMono(
                       fontWeight: FontWeight.w600,
-                      fontSize: 60.0,
+                      fontSize: screenWidth < 700 ? 45.0 : 65.0,
                       height: 1.0,
                     ),
                   ),
@@ -148,7 +169,7 @@ double slowDecrease(double x) {
                     textAlign: TextAlign.right,
                     style: GoogleFonts.robotoMono(
                       fontWeight: FontWeight.w600,
-                      fontSize: 60.0,
+                      fontSize: screenWidth < 700 ? 45.0 : 65.0,
                       height: 1.0,
                     ),
                   ),
@@ -161,7 +182,7 @@ double slowDecrease(double x) {
               left: 0,
               height: screenHeight,
               child: Container(
-                color: const Color.fromARGB(255, 14, 153, 200),
+                color: const Color.fromARGB(245, 14, 153, 200),
               ),
             ), */
 
@@ -171,44 +192,43 @@ double slowDecrease(double x) {
                 child: SizedBox(height: layoutHeight),
               ),
             ),
-            
-            
             Positioned(
                 height: 50,
-                width: screenWidth -30 ,
+                width: screenWidth - 30,
                 bottom: -370 - layerSpeed6 * _scrollOffset,
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: ContactButton(),
                 )),
-                Positioned(
+            Positioned(
                 height: 50,
-                width: screenWidth -30,
+                width: screenWidth - 30,
                 bottom: -350 - layerSpeed5 * _scrollOffset,
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: ProjectsButton(),
                 )),
-                Positioned(
+            Positioned(
                 height: 50,
-                width: screenWidth -30,
+                width: screenWidth - 30,
                 bottom: -330 - layerSpeed4 * _scrollOffset,
                 child: const Padding(
                   padding: EdgeInsets.all(8.0),
                   child: AboutButton(),
-                )),
+                ),
+                ),
             Positioned(
               top: max(
-                  speedCircles * _scrollOffset + (screenHeight / 2 - 260), 0),
-              right: screenWidth / 2 - 200,
+                  speedCircles * _scrollOffset + (screenHeight / 2 - 250), 0),
+              right: screenWidth / 2 - 215,
               /* bottom: layerSpeed2 * _scrollOffset, */
               child: Transform.scale(
-                scale: 1 / (sigmoid(_scrollOffset)*2),
-                child: const CirclesWidget()),
+                  scale: 1 / (sigmoid(_scrollOffset) * 2),
+                  child: const CirclesWidget()),
             ),
           ],
         ),
-      ),
+      ).animate()/* .slideY(begin: -0.5, end: 0, duration: 400.ms, delay: 300.ms, curve: Curves.easeIn) */.fadeIn(duration: 500.ms,delay: 400.ms, curve: Curves.easeIn),
     );
   }
 }
